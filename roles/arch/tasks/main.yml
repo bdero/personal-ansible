@@ -7,7 +7,6 @@
     - emacs-nox
     - wget
     - sudo
-    - zsh
     - tmux
     - git
     - python2-pip
@@ -27,6 +26,7 @@
     - keepassx
     - firefox
     - chromium
+    - pidgin
 
 # These are packages which include proprietary software.
 # They're included since they're pretty much necessary for
