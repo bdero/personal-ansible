@@ -1,6 +1,9 @@
 ---
 - hosts: all
+  sudo: yes
   remote_user: root
+  vars:
+    - ansible_python_interpreter: python2
   tasks:
     - name: Update package cache
       pacman: update_cache=yes
@@ -16,6 +19,9 @@
         - xorg-xinit
         - xf86-video-nouveau
         - gnome
+        - gnome-keyring
+        - wpa_supplicant
+        - wireless_tools
         - networkmanager
         - network-manager-applet
 
@@ -26,3 +32,10 @@
         state=present
         create=yes
         validate="visudo -cf %s"
+
+    - name: Set locale
+      lineinfile: >
+        dest=/etc/locale.conf owner=root group=root mode=644
+        line="LANG=en_US.UTF-8"
+        state=present
+        create=yes
