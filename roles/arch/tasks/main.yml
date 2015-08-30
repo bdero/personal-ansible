@@ -1,0 +1,83 @@
+- name: Update package cache
+  pacman: update_cache=yes
+
+- name: Install packages
+  pacman: name={{ item }} state=present
+  with_items:
+    - emacs-nox
+    - wget
+    - sudo
+    - zsh
+    - tmux
+    - git
+    - python2-pip
+    - xorg-server
+    - xorg-xinit
+    - xorg-xrandr
+    - wayland
+    - xorg-server-xwayland
+    - xf86-video-nouveau
+    - gnome
+    - gnome-keyring
+    - wpa_supplicant
+    - wireless_tools
+    - networkmanager
+    - network-manager-applet
+    - keepassx
+    - firefox
+    - chromium
+
+# These are packages which include proprietary software.
+# They're included since they're pretty much necessary for
+# daily operation, and should be periodically revisited for
+# viable alternatives and/or deprecation.
+- name: Install proprietary packages
+  pacman: name={{ item }} state=present
+  with_items:
+    - flashplugin
+  when: include_proprietary
+
+- name: Ensure dhcpcd is not enabled or running
+  service: >
+    name=dhcpcd
+    enabled=no
+    state=stopped
+
+- name: Ensure NetworkManager is enabled and running
+  service: >
+    name=NetworkManager
+    enabled=yes
+    state=started
+
+- name: Set passwordless sudo for wheel group
+  lineinfile: >
+    dest=/etc/sudoers.d/wheel owner=root group=root mode=0440
+    line="%wheel ALL=(ALL) NOPASSWD:ALL"
+    state=present
+    create=yes
+    validate="visudo -cf %s"
+
+- name: Set locale
+  lineinfile: >
+    dest=/etc/locale.conf owner=root group=root mode=644
+    line="LANG=en_US.UTF-8"
+    state=present
+    create=yes
+
+- name: Create user
+  user: >
+    name={{ user.name }}
+    password={{ user.password }}
+    state=present
+    shell=/bin/zsh
+    group=users
+    groups=wheel
+
+- name: Install AUR packages
+  sudo: yes
+  sudo_user: "{{ user }}"
+  command: aurget -S {{ item }} --noedit --nodiscard --noconfirm --deps
+  args:
+    chdir: /tmp
+  with_items:
+    - heroku-toolbelt
