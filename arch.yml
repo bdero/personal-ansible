@@ -10,5 +10,7 @@
   vars_files:
     - vault/user.yml
   roles:
-    - arch
-    - zsh
+    - role: arch
+      tags: arch
+    - role: zsh
+      tags: zsh
