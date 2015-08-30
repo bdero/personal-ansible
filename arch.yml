@@ -17,6 +17,7 @@
         - wget
         - sudo
         - zsh
+        - tmux
         - git
         - ansible
         - xorg-server
@@ -30,14 +31,17 @@
         - network-manager-applet
         - firefox
 
-    - name: Install AUR packages
-      sudo: yes
-      sudo_user: "{{ user }}"
-      command: aurget -S {{ item }} --noedit --nodiscard --noconfirm --deps
-      args:
-        chdir: /tmp
-      with_items:
-        - heroku-toolbelt
+    - name: Ensure dhcpcd is not enabled or running
+      service: >
+        name=dhcpcd
+        enabled=no
+        state=stopped
+
+    - name: Ensure NetworkManager is enabled and running
+      service: >
+        name=NetworkManager
+        enabled=yes
+        state=started
 
     - name: Set passwordless sudo for wheel group
       lineinfile: >
@@ -54,14 +58,30 @@
         state=present
         create=yes
 
-    - name: Ensure dhcpcd is not enabled or running
-      service: >
-        name=dhcpcd
-        enabled=no
-        state=stopped
+    - name: Install AUR packages
+      sudo: yes
+      sudo_user: "{{ user }}"
+      command: aurget -S {{ item }} --noedit --nodiscard --noconfirm --deps
+      args:
+        chdir: /tmp
+      with_items:
+        - heroku-toolbelt
 
-    - name: Ensure NetworkManager is enabled and running
-      service: >
-        name=NetworkManager
-        enabled=yes
-        state=started
+    - name: Install oh-my-zsh in home directory
+      sudo: yes
+      sudo_user: "{{ user }}"
+      shell: sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+      args:
+        chdir: "/home/{{ user }}"
+        creates: "/home/{{ user }}/.oh-my-zsh"
+      ignore_errors: yes
+
+    - name: Register default shell
+      shell: "echo $shell"
+      register: default_shell
+      changed_when: no
+      sudo: no
+
+    - name: Make zsh the default shell
+      shell: chsh -s /bin/bash
+      when: default_shell.stdout.find("/bin/zsh") == -1
