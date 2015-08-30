@@ -1,11 +1,16 @@
 # Personal setup for arch
+#
+# Example usage:
+#   ansible-playbook -i localhost, arch.yml --vault-password-file vaultpass.txt
+
 ---
 - hosts: all
   sudo: yes
   remote_user: root
+  vars_files:
+    - vault/user.yml
   vars:
     - ansible_python_interpreter: python2
-    - user: bdero
     - include_proprietary: yes
   tasks:
     - name: Update package cache
@@ -21,8 +26,12 @@
         - tmux
         - git
         - ansible
+        - python2-pip
         - xorg-server
         - xorg-xinit
+        - xorg-xrandr
+        - wayland
+        - xorg-server-xwayland
         - xf86-video-nouveau
         - gnome
         - gnome-keyring
@@ -70,6 +79,15 @@
         line="LANG=en_US.UTF-8"
         state=present
         create=yes
+
+    - name: Create user
+      user: >
+        name={{ user.name }}
+        password={{ user.password }}
+        state=present
+        shell=/bin/zsh
+        group=users
+        groups=wheel
 
     - name: Install AUR packages
       sudo: yes
