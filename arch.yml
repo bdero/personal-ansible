@@ -1,3 +1,4 @@
+# Personal setup for arch
 ---
 - hosts: all
   sudo: yes
@@ -24,8 +25,9 @@
         - wireless_tools
         - networkmanager
         - network-manager-applet
+        - firefox
 
-    - name: Add passwordless wheel to sudoers
+    - name: Set passwordless sudo for wheel group
       lineinfile: >
         dest=/etc/sudoers.d/wheel owner=root group=root mode=0440
         line="%wheel ALL=(ALL) NOPASSWD:ALL"
@@ -39,3 +41,15 @@
         line="LANG=en_US.UTF-8"
         state=present
         create=yes
+
+    - name: Ensure dhcpcd is not enabled or running
+      service: >
+        name=dhcpcd
+        enabled=no
+        state=stopped
+
+    - name: Ensure NetworkManager is enabled and running
+      service: >
+        name=NetworkManager
+        enabled=yes
+        state=started
