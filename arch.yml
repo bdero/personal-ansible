@@ -11,22 +11,4 @@
     - vault/user.yml
   roles:
     - arch
-  tasks:
-    - name: Install oh-my-zsh in home directory
-      sudo: yes
-      sudo_user: "{{ user }}"
-      shell: sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-      args:
-        chdir: "/home/{{ user }}"
-        creates: "/home/{{ user }}/.oh-my-zsh"
-      ignore_errors: yes
-
-    - name: Register default shell
-      shell: "echo $shell"
-      register: default_shell
-      changed_when: no
-      sudo: no
-
-    - name: Make zsh the default shell
-      shell: chsh -s /bin/bash
-      when: default_shell.stdout.find("/bin/zsh") == -1
+    - zsh
