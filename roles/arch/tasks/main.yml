@@ -19,6 +19,7 @@
     - xf86-video-nouveau
     - gnome
     - gnome-keyring
+    - gnome-tweak-tool
     - wpa_supplicant
     - wireless_tools
     - networkmanager
