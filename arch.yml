@@ -5,6 +5,7 @@
   remote_user: root
   vars:
     - ansible_python_interpreter: python2
+    - user: bdero
   tasks:
     - name: Update package cache
       pacman: update_cache=yes
@@ -13,7 +14,9 @@
       pacman: name={{ item }} state=present
       with_items:
         - emacs-nox
+        - wget
         - sudo
+        - zsh
         - git
         - ansible
         - xorg-server
@@ -26,6 +29,15 @@
         - networkmanager
         - network-manager-applet
         - firefox
+
+    - name: Install AUR packages
+      sudo: yes
+      sudo_user: "{{ user }}"
+      command: aurget -S {{ item }} --noedit --nodiscard --noconfirm --deps
+      args:
+        chdir: /tmp
+      with_items:
+        - heroku-toolbelt
 
     - name: Set passwordless sudo for wheel group
       lineinfile: >
