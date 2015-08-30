@@ -27,6 +27,7 @@
     - firefox
     - chromium
     - pidgin
+    - vlc
 
 # These are packages which include proprietary software.
 # They're included since they're pretty much necessary for
