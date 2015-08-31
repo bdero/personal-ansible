@@ -21,17 +21,12 @@
     enabled=no
     state=stopped
 
-- name: Ensure NetworkManager is enabled and running
+- name: Ensure services are enabled and running
   service: >
-    name=NetworkManager
+    name={{ item }}
     enabled=yes
     state=started
-
-- name: Ensure docker is enabled and running
-  service: >
-    name=docker
-    enabled=yes
-    state=started
+  with_items: services
 
 - name: Set passwordless sudo for wheel group
   lineinfile: >

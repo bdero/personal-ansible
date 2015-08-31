@@ -19,6 +19,7 @@ packages:
   - dnsutils
   - networkmanager
   - network-manager-applet
+  - nfs-server
   - keepassx
   - virtualbox
   - vagrant
@@ -27,3 +28,9 @@ packages:
   - chromium
   - pidgin
   - vlc
+
+services:
+  - NetworkManager
+  - docker
+  - rpcbind
+  - nfs-server
