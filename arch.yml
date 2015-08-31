@@ -12,6 +12,8 @@
   roles:
     - role: arch
       tags: arch
+    - role: pacaur
+      tags: pacaur
     - role: git
       tags: git
     - role: zsh

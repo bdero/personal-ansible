@@ -1,0 +1,26 @@
+- name: Install expac
+  pacman: name=expac state=present
+
+- block:
+    - name: Download build file archives
+      command: >
+        wget https://aur4.archlinux.org/cgit/aur.git/snapshot/{{ item }}.tar.gz
+      args:
+        chdir: /tmp
+        creates: "/tmp/{{ item }}.tar.gz"
+      with_items: packages
+
+    - name: Unpack archives
+      unarchive: >
+        copy=no
+        src=/tmp/{{ item }}.tar.gz
+        dest=/tmp
+      with_items: packages
+    
+    - name: Build the packages
+      command: makepkg -i --noconfirm
+      args:
+        chdir: "/tmp/{{ item }}"
+      with_items: packages
+  sudo: yes
+  sudo_user: "{{ user.name }}"
