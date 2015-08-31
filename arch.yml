@@ -7,6 +7,8 @@
 - hosts: all
   sudo: yes
   remote_user: root
+  vars:
+    ansible_python_interpreter: python2
   vars_files:
     - vault/user.yml
   roles:

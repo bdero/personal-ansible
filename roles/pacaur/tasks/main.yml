@@ -8,19 +8,19 @@
       args:
         chdir: /tmp
         creates: "/tmp/{{ item }}.tar.gz"
-      with_items: packages
+      with_items: pacaur_packages
 
     - name: Unpack archives
       unarchive: >
         copy=no
         src=/tmp/{{ item }}.tar.gz
         dest=/tmp
-      with_items: packages
+      with_items: pacaur_packages
     
     - name: Build the packages
       command: makepkg -i --noconfirm
       args:
         chdir: "/tmp/{{ item }}"
-      with_items: packages
-  sudo: yes
-  sudo_user: "{{ user.name }}"
+      with_items: pacaur_packages
+  become: yes
+  become_user: "{{ user.name }}"

@@ -3,30 +3,7 @@
 
 - name: Install packages
   pacman: name={{ item }} state=present
-  with_items:
-    - emacs-nox
-    - wget
-    - sudo
-    - tmux
-    - python2-pip
-    - xorg-server
-    - xorg-xinit
-    - xorg-xrandr
-    - wayland
-    - xorg-server-xwayland
-    - xf86-video-nouveau
-    - gnome
-    - gnome-keyring
-    - gnome-tweak-tool
-    - wpa_supplicant
-    - wireless_tools
-    - networkmanager
-    - network-manager-applet
-    - keepassx
-    - firefox
-    - chromium
-    - pidgin
-    - vlc
+  with_items: packages
 
 # These are packages which include proprietary software.
 # They're included since they're pretty much necessary for
@@ -81,5 +58,5 @@
     src=gpg.conf
     dest={{ user.home }}/.gnupg/gpg.conf
     force=yes
-  sudo: yes
-  sudo_user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ user.name }}"

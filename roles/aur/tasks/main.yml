@@ -11,4 +11,4 @@
     EDITOR: /bin/true
   become: yes
   become_user: "{{ user.name }}"
-  with_items: packages
+  with_items: aur_packages

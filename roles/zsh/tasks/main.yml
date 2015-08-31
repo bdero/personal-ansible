@@ -11,8 +11,8 @@
       template: >
         src=.zshrc.j2
         dest={{ user.home }}/.zshrc
-  sudo: yes
-  sudo_user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ user.name }}"
 
 - name: Register default shell
   shell: "echo $shell"
@@ -43,5 +43,5 @@
   command: /tmp/fonts/install.sh
   args:
     creates: "{{ user.home }}/.fonts"
-  sudo: yes
-  sudo_user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ user.name }}"

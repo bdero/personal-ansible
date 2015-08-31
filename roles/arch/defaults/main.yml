@@ -1,2 +1,26 @@
-ansible_python_interpreter: python2
 include_proprietary: yes
+
+packages:
+  - emacs-nox
+  - wget
+  - sudo
+  - tmux
+  - python2-pip
+  - xorg-server
+  - xorg-xinit
+  - xorg-xrandr
+  - wayland
+  - xorg-server-xwayland
+  - xf86-video-nouveau
+  - gnome
+  - gnome-keyring
+  - gnome-tweak-tool
+  - wpa_supplicant
+  - wireless_tools
+  - networkmanager
+  - network-manager-applet
+  - keepassx
+  - firefox
+  - chromium
+  - pidgin
+  - vlc
