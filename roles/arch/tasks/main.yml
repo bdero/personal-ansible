@@ -44,9 +44,13 @@
     create=yes
 
 - name: Drop VirtualBox module config
-  copy: >
-    src=virtualbox.conf
+  template: >
+    src=virtualbox.conf.j2
     dest=/etc/modules-load.d/virtualbox.conf
+
+- name: Enable VirtualBox kernel modules
+  modprobe: name={{ item }} state=present
+  with_items: virtualbox_modules
 
 - name: Create user
   user: >

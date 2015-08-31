@@ -19,7 +19,7 @@ packages:
   - dnsutils
   - networkmanager
   - network-manager-applet
-  - nfs-server
+  - nfs-utils
   - keepassx
   - virtualbox
   - vagrant
@@ -34,3 +34,9 @@ services:
   - docker
   - rpcbind
   - nfs-server
+
+virtualbox_modules:
+  - vboxdrv
+  - vboxnetadp
+  - vboxnetflt
+  - vboxpci
