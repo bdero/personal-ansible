@@ -41,5 +41,7 @@
 
 - name: Install powerline fonts
   command: /tmp/fonts/install.sh
+  args:
+    creates: "{{ user.home }}/.fonts"
   sudo: yes
   sudo_user: "{{ user.name }}"
