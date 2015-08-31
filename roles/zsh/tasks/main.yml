@@ -23,3 +23,13 @@
 - name: Make zsh the default shell
   shell: chsh -s /bin/bash
   when: default_shell.stdout.find("/bin/zsh") == -1
+
+- name: Create custom themes directory
+  file: >
+    path="{{ user.home }}/.oh-my-zsh/custom/themes"
+    state=directory
+
+- name: Install powerlevel9k theme
+  git: >
+    repo=https://github.com/bhilburn/powerlevel9k.git
+    dest="{{ user.home }}/.oh-my-zsh/custom/themes/powerlevel9k"
