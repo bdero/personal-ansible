@@ -73,3 +73,13 @@
     shell=/bin/zsh
     group=users
     groups=wheel
+
+# This is a template so that it'll replace any existing config
+# so long as it's different.
+- name: Drop gpg config
+  template: >
+    src=gpg.conf
+    dest={{ user.home }}/.gnupg/gpg.conf
+    force=yes
+  sudo: yes
+  sudo_user: "{{ user.name }}"
