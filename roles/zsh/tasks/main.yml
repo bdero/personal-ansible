@@ -5,14 +5,14 @@
     - name: Install oh-my-zsh in home directory
       git: >
         repo=https://raw.github.com/robbyrussell/oh-my-zsh.git
-        dest=/home/{{ user }}/.oh-my-zsh
+        dest={{ user.home }}/.oh-my-zsh
 
     - name: Copy zshrc
       copy: >
         src=.zshrc
-	dest=/home/{{ user }}/.zshrc
+        dest={{ user.home }}/.zshrc
   sudo: yes
-  sudo_user: "{{ user }}"
+  sudo_user: "{{ user.name }}"
 
 - name: Register default shell
   shell: "echo $shell"
