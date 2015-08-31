@@ -9,7 +9,7 @@
 
     - name: Template zshrc
       template: >
-        src=.zshrc
+        src=.zshrc.j2
         dest={{ user.home }}/.zshrc
   sudo: yes
   sudo_user: "{{ user.name }}"
