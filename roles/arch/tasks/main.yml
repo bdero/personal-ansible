@@ -51,12 +51,19 @@
     group=users
     groups=wheel
 
-# This is a template so that it'll replace any existing config
-# so long as it's different.
-- name: Drop gpg config
-  template: >
-    src=gpg.conf
-    dest={{ user.home }}/.gnupg/gpg.conf
-    force=yes
+# Drop user config on remote machine
+- block:
+    # This is a template so that it'll replace any existing config
+    # so long as it's different.
+    - name: Drop gpg config
+      template: >
+        src=gpg.conf
+        dest={{ user.home }}/.gnupg/gpg.conf
+        force=yes
+
+    - name: Drop xinitrc
+      copy: >
+        src=.xinitrc
+        dest="{{ user.home }}/.xinitrc"
   become: yes
   become_user: "{{ user.name }}"
