@@ -8,7 +8,6 @@
     - wget
     - sudo
     - tmux
-    - git
     - python2-pip
     - xorg-server
     - xorg-xinit

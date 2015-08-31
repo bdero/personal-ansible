@@ -12,5 +12,7 @@
   roles:
     - role: arch
       tags: arch
+    - role: git
+      tags: git
     - role: zsh
       tags: zsh

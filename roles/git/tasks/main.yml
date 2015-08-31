@@ -1,0 +1,12 @@
+- name: Install packages
+  pacman: name=git state=present
+
+- name: Copy gitignore
+  copy: >
+    src=.gitignore
+    dest={{ user.home }}/.gitignore
+
+- name: Template gitconfig
+  template: >
+    src=.gitconfig.j2
+    dest={{ user.home }}/.gitconfig
