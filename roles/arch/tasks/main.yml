@@ -49,7 +49,7 @@
     state=present
     shell=/bin/zsh
     group=users
-    groups=wheel
+    groups=wheel,docker
 
 # Drop user config on remote machine
 - block:
