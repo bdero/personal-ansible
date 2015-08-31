@@ -10,8 +10,6 @@ packages:
   - xorg-server
   - xorg-xinit
   - xorg-xrandr
-  - wayland
-  - xorg-server-xwayland
   - xf86-video-nouveau
   - gnome
   - gnome-keyring
@@ -22,6 +20,8 @@ packages:
   - networkmanager
   - network-manager-applet
   - keepassx
+  - virtualbox
+  - vagrant
   - firefox
   - chromium
   - pidgin
