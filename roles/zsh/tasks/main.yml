@@ -7,8 +7,8 @@
         repo=https://raw.github.com/robbyrussell/oh-my-zsh.git
         dest={{ user.home }}/.oh-my-zsh
 
-    - name: Copy zshrc
-      copy: >
+    - name: Template zshrc
+      template: >
         src=.zshrc
         dest={{ user.home }}/.zshrc
   sudo: yes
