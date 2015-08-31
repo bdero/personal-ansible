@@ -27,6 +27,12 @@
     enabled=yes
     state=started
 
+- name: Ensure docker is enabled and running
+  service: >
+    name=docker
+    enabled=yes
+    state=started
+
 - name: Set passwordless sudo for wheel group
   lineinfile: >
     dest=/etc/sudoers.d/wheel owner=root group=root mode=0440
@@ -49,7 +55,7 @@
     state=present
     shell=/bin/zsh
     group=users
-    groups=wheel
+    groups=wheel,docker
 
 # Drop user config on remote machine
 - block:
