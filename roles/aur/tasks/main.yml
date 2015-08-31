@@ -1,12 +1,13 @@
 # pacaur doesn't seem to have a flag which disables prompting
 # for for whether or not the user would like to edit the
 # PKGBUILD file in an editor before continuing, so I piped
-# `yes n` to it.
-# EDITOR is also set to `/bin/true` because for some reason,
-# pacaur still tries to launch the editor if there's a second
-# PKGBUILD prompt.
+# `yes` to it and set EDITOR to `/bin/true`.
+# Even with the `noconfirm` flag, when there are dependencies
+# in the distribution repos, pacaur will prompt for
+# confirmation, which is one of the reasons why `yes n` won't
+# work.
 - name: Install AUR packages
-  shell: yes n | pacaur -S {{ item }} --noconfirm --needed
+  shell: yes | pacaur -S {{ item }} --noconfirm --needed
   environment:
     EDITOR: /bin/true
   become: yes
