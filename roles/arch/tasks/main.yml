@@ -43,6 +43,11 @@
     state=present
     create=yes
 
+- name: Drop VirtualBox module config
+  copy: >
+    src=virtualbox.conf
+    dest=/etc/modules-load.d/virtualbox.conf
+
 - name: Create user
   user: >
     name={{ user.name }}
