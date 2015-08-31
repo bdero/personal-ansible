@@ -1,4 +1,5 @@
 aur_packages:
-  broadcom-wl
-  heroku-toolbelt
-  hipchat
+  - broadcom-wl
+  - heroku-toolbelt
+  - hipchat
+  - docker-compose
