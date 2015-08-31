@@ -6,6 +6,7 @@ packages:
   - sudo
   - tmux
   - python2-pip
+  - python2-virtualenv
   - xorg-server
   - xorg-xinit
   - xorg-xrandr
@@ -17,6 +18,7 @@ packages:
   - gnome-tweak-tool
   - wpa_supplicant
   - wireless_tools
+  - dnsutils
   - networkmanager
   - network-manager-applet
   - keepassx
