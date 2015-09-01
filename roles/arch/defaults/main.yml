@@ -25,6 +25,7 @@ packages:
   - virtualbox
   - vagrant
   - docker
+  - gst-libav
   - firefox
   - chromium
   - pidgin
