@@ -5,6 +5,7 @@ packages:
   - wget
   - sudo
   - tmux
+  - htop
   - python2-pip
   - python2-virtualenv
   - xorg-server
