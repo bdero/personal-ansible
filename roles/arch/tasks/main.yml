@@ -43,6 +43,14 @@
     state=present
     create=yes
 
+- name: Drop search domains
+  copy: >
+    src=resolv.conf.tail
+    dest=/etc/resolv.conf.tail
+    owner=root
+    group=root
+    mode=u+rw,g+r,o+r
+
 - name: Drop VirtualBox module config
   template: >
     src=virtualbox.conf.j2
