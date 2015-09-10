@@ -6,6 +6,10 @@ packages:
   - sudo
   - tmux
   - htop
+  - ntp
+  - net-tools
+  - git
+  - hub
   - python2-pip
   - python2-virtualenv
   - xorg-server
@@ -37,6 +41,7 @@ services:
   - docker
   - rpcbind
   - nfs-server
+  - ntpd
 
 virtualbox_modules:
   - vboxdrv
