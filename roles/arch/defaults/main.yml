@@ -30,6 +30,7 @@ packages:
   - chromium
   - pidgin
   - vlc
+  - meld
 
 services:
   - NetworkManager
