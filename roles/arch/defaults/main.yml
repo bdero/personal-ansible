@@ -24,6 +24,7 @@ packages:
   - dnsutils
   - networkmanager
   - network-manager-applet
+  - networkmanager-openconnect
   - nfs-utils
   - keepassx
   - virtualbox
